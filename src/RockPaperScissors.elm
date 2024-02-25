@@ -26,14 +26,14 @@ rockPaperScissors =
   Decision
     Player1
     [Rock, Paper, Scissors]
-    (\(hist1, action) -> hist1 ++ [InfoAction action])
-    (\(hist2, _) -> hist2 ++ [])
+    (\hist1 action -> hist1 ++ [InfoAction action])
+    (\hist2 _ -> hist2 ++ [])
     (\action ->
       Decision
         Player2
         [Rock, Paper, Scissors]
-        (\(hist1, _) -> hist1 ++ [])
-        (\(hist2, action2) -> hist2 ++ [InfoAction action2])
+        (\hist1 _ -> hist1 ++ [])
+        (\hist2 action2 -> hist2 ++ [InfoAction action2])
         (\action2 ->
           case action of
             Rock ->

@@ -25,20 +25,20 @@ kuhnPoker : Game Player (List Info) (Int, Int) Action
 kuhnPoker =
   Chance
     [(1,2), (1,3), (2,1), (2,3), (3,1), (3,2)]
-    (\(hist1, (card1, _)) -> hist1 ++ [InfoCard card1])
-    (\(hist2, (_, card2)) -> hist2 ++ [InfoCard card2])
+    (\hist1 (card1, _) -> hist1 ++ [InfoCard card1])
+    (\hist2 (_, card2) -> hist2 ++ [InfoCard card2])
     (\(card1, card2) ->
       Decision
         Player1
         [Bet, Pass]
-        (\(hist1, action1) -> hist1 ++ [InfoAction Player1 action1])
-        (\(hist2, action1) -> hist2 ++ [InfoAction Player1 action1])
+        (\hist1 action1 -> hist1 ++ [InfoAction Player1 action1])
+        (\hist2 action1 -> hist2 ++ [InfoAction Player1 action1])
         (\action1 ->
           Decision
             Player2
             [Bet, Pass]
-            (\(hist1, action2) -> hist1 ++ [InfoAction Player2 action2])
-            (\(hist2, action2) -> hist2 ++ [InfoAction Player2 action2])
+            (\hist1 action2 -> hist1 ++ [InfoAction Player2 action2])
+            (\hist2 action2 -> hist2 ++ [InfoAction Player2 action2])
             (\action2 ->
               case (action1, action2) of
                 (Pass, Pass) ->
@@ -57,8 +57,8 @@ kuhnPoker =
                   Decision
                     Player1
                     [Bet, Pass]
-                    (\(hist1, action3) -> hist1 ++ [InfoAction Player1 action3])
-                    (\(hist2, action3) -> hist2 ++ [InfoAction Player1 action3])
+                    (\hist1 action3 -> hist1 ++ [InfoAction Player1 action3])
+                    (\hist2 action3 -> hist2 ++ [InfoAction Player1 action3])
                     (\action3 ->
                       case action3 of
                         Pass ->
